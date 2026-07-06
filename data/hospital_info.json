@@ -1,0 +1,133 @@
+{
+  "hospital": {
+    "name": "City General Hospital",
+    "tagline": "Caring for Life, Every Day",
+    "established": 1985,
+    "accreditation": ["NABH Accredited", "ISO 9001:2015", "JCI Accredited"],
+    "address": {
+      "line1": "123 Healthcare Avenue",
+      "line2": "Medical District",
+      "city": "Chennai",
+      "state": "Tamil Nadu",
+      "pin": "600001"
+    },
+    "contact": {
+      "main": "+91-44-1234-5678",
+      "emergency": "+91-44-1234-9999",
+      "appointment": "+91-44-1234-5600",
+      "email": "info@citygeneralhospital.com",
+      "website": "www.citygeneralhospital.com"
+    },
+    "timings": {
+      "opd": "Monday to Saturday: 08:00 AM - 08:00 PM",
+      "emergency": "24 Hours, 7 Days a Week",
+      "pharmacy": "24 Hours, 7 Days a Week",
+      "lab": "Monday to Sunday: 07:00 AM - 09:00 PM",
+      "radiology": "Monday to Saturday: 08:00 AM - 08:00 PM",
+      "visiting_hours": "10:00 AM - 12:00 PM and 05:00 PM - 07:00 PM"
+    },
+    "bed_capacity": 500,
+    "icu_beds": 50,
+    "operation_theatres": 12
+  },
+  "facilities": [
+    {
+      "name": "Emergency & Trauma Care",
+      "description": "24/7 emergency services with dedicated trauma bays, rapid response teams, and advanced life support equipment.",
+      "location": "Ground Floor, Main Entrance",
+      "available_24_7": true
+    },
+    {
+      "name": "Intensive Care Unit (ICU)",
+      "description": "50-bed ICU with advanced monitoring, ventilator support, and round-the-clock critical care specialists.",
+      "location": "2nd Floor, Main Block",
+      "available_24_7": true
+    },
+    {
+      "name": "Advanced Diagnostic Laboratory",
+      "description": "Full-service pathology lab with automated analyzers for blood, urine, microbiology, and histopathology tests. Results available online.",
+      "location": "Basement, Block L",
+      "available_24_7": false
+    },
+    {
+      "name": "Radiology & Imaging",
+      "description": "State-of-the-art 3T MRI, 128-slice CT, digital X-ray, ultrasound, mammography, and nuclear medicine.",
+      "location": "Ground Floor, Block R",
+      "available_24_7": false
+    },
+    {
+      "name": "Pharmacy",
+      "description": "24-hour in-house pharmacy stocked with a comprehensive range of medicines, medical supplies, and OTC products.",
+      "location": "Ground Floor, Near Main Entrance",
+      "available_24_7": true
+    },
+    {
+      "name": "Physiotherapy & Rehabilitation",
+      "description": "Modern rehab center offering physiotherapy, occupational therapy, speech therapy, and cardiac rehabilitation.",
+      "location": "1st Floor, Block R",
+      "available_24_7": false
+    },
+    {
+      "name": "Blood Bank",
+      "description": "Fully automated blood bank with component therapy facilities, available 24/7 for emergencies.",
+      "location": "Ground Floor, Block B",
+      "available_24_7": true
+    },
+    {
+      "name": "Cafeteria & Nutrition Services",
+      "description": "Patient-friendly cafeteria offering balanced meals, diet-specific menus, and visitor dining.",
+      "location": "Ground Floor, Central Block",
+      "available_24_7": false
+    },
+    {
+      "name": "Ambulance Services",
+      "description": "Fleet of Advanced Life Support (ALS) and Basic Life Support (BLS) ambulances available 24/7.",
+      "location": "Main Entrance",
+      "available_24_7": true
+    },
+    {
+      "name": "Health Checkup Packages",
+      "description": "Comprehensive health checkup packages for all age groups including Basic, Executive, and Comprehensive packages.",
+      "location": "Ground Floor, Block H",
+      "available_24_7": false
+    }
+  ],
+  "insurance": {
+    "cashless_partners": [
+      "Star Health Insurance",
+      "HDFC ERGO Health",
+      "ICICI Lombard",
+      "New India Assurance",
+      "United India Insurance",
+      "National Insurance",
+      "Bajaj Allianz Health",
+      "Manipal Cigna Health",
+      "Niva Bupa",
+      "Aditya Birla Health Insurance"
+    ],
+    "tpa_partners": ["Medi Assist", "Vidal Health", "Health India TPA", "Raksha TPA"],
+    "government_schemes": ["Ayushman Bharat PM-JAY", "Chief Minister's Comprehensive Health Insurance", "ESI"]
+  },
+  "faqs": [
+    {
+      "question": "What are the visiting hours?",
+      "answer": "Visiting hours are 10:00 AM - 12:00 PM and 05:00 PM - 07:00 PM daily. ICU visits are restricted to 15 minutes twice daily."
+    },
+    {
+      "question": "Is parking available?",
+      "answer": "Yes, free parking is available for 300+ vehicles in our basement and multi-level car park adjacent to the hospital."
+    },
+    {
+      "question": "Can I book appointments online?",
+      "answer": "Yes! Use the Appointment Scheduling section in this app to book, reschedule, or cancel appointments."
+    },
+    {
+      "question": "Are cashless insurance facilities available?",
+      "answer": "Yes, we have cashless tie-ups with 10+ major insurance providers. Please visit our insurance desk on Ground Floor, Block I."
+    },
+    {
+      "question": "Do you have a 24-hour pharmacy?",
+      "answer": "Yes, our in-house pharmacy near the main entrance is open 24 hours, 7 days a week."
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "departments": [
+    {
+      "id": 1,
+      "name": "Cardiology",
+      "floor": "2nd Floor, Block C",
+      "head_of_department": "Dr. Ananya Sharma",
+      "description": "Comprehensive cardiac care including diagnosis, treatment, and prevention of heart diseases. Services include ECG, echocardiogram, stress tests, angioplasty, and cardiac surgery coordination.",
+      "services": [
+        "ECG & Holter Monitoring",
+        "Echocardiogram",
+        "Treadmill Stress Test",
+        "Coronary Angiography",
+        "Pacemaker Implantation",
+        "Cardiac Rehabilitation",
+        "Hypertension Management"
+      ],
+      "emergency": true,
+      "phone": "+91-44-1234-2001"
+    },
+    {
+      "id": 2,
+      "name": "Neurology",
+      "floor": "1st Floor, Block N",
+      "head_of_department": "Dr. Rajesh Kumar",
+      "description": "Diagnosis and treatment of disorders of the nervous system including brain, spinal cord, nerves, and muscles.",
+      "services": [
+        "EEG (Electroencephalogram)",
+        "EMG & Nerve Conduction Study",
+        "MRI Brain & Spine",
+        "Stroke Management",
+        "Epilepsy Treatment",
+        "Parkinson's Disease Management",
+        "Memory & Cognitive Disorders"
+      ],
+      "emergency": true,
+      "phone": "+91-44-1234-2002"
+    },
+    {
+      "id": 3,
+      "name": "Orthopedics",
+      "floor": "3rd Floor, Block O",
+      "head_of_department": "Dr. Priya Menon",
+      "description": "Treatment of musculoskeletal system conditions including bones, joints, ligaments, tendons, and muscles.",
+      "services": [
+        "Joint Replacement Surgery (Knee, Hip)",
+        "Arthroscopic Surgery",
+        "Fracture Management",
+        "Sports Injury Treatment",
+        "Spine Surgery",
+        "Physiotherapy",
+        "Bone Density Scanning"
+      ],
+      "emergency": true,
+      "phone": "+91-44-1234-2003"
+    },
+    {
+      "id": 4,
+      "name": "General Medicine",
+      "floor": "Ground Floor, Block G",
+      "head_of_department": "Dr. Suresh Patel",
+      "description": "Primary and preventive healthcare for adults, managing acute and chronic medical conditions.",
+      "services": [
+        "General Consultation",
+        "Diabetes Management",
+        "Thyroid Disorders",
+        "Fever & Infections",
+        "Routine Health Checkups",
+        "Vaccination",
+        "Preventive Health Screening"
+      ],
+      "emergency": true,
+      "phone": "+91-44-1234-2004"
+    },
+    {
+      "id": 5,
+      "name": "Dermatology",
+      "floor": "2nd Floor, Block D",
+      "head_of_department": "Dr. Kavitha Nair",
+      "description": "Diagnosis and treatment of skin, hair, and nail conditions.",
+      "services": [
+        "Acne & Pimple Treatment",
+        "Psoriasis & Eczema Management",
+        "Skin Allergy Testing",
+        "Hair Loss Treatment",
+        "Laser Skin Treatments",
+        "Mole & Wart Removal",
+        "Cosmetic Dermatology"
+      ],
+      "emergency": false,
+      "phone": "+91-44-1234-2005"
+    },
+    {
+      "id": 6,
+      "name": "Pediatrics",
+      "floor": "4th Floor, Block P",
+      "head_of_department": "Dr. Arjun Reddy",
+      "description": "Medical care for infants, children, and adolescents from birth to 18 years.",
+      "services": [
+        "Newborn Care & NICU",
+        "Growth & Development Monitoring",
+        "Childhood Vaccinations",
+        "Pediatric Emergencies",
+        "Nutritional Guidance",
+        "Asthma & Allergy in Children",
+        "Developmental Disorders"
+      ],
+      "emergency": true,
+      "phone": "+91-44-1234-2006"
+    },
+    {
+      "id": 7,
+      "name": "Gynecology",
+      "floor": "3rd Floor, Block G",
+      "head_of_department": "Dr. Meera Iyer",
+      "description": "Comprehensive women's health services including obstetrics, gynecological surgery, and reproductive health.",
+      "services": [
+        "Antenatal & Postnatal Care",
+        "Normal & Cesarean Delivery",
+        "Laparoscopic Surgery",
+        "PCOS Management",
+        "Hysterectomy",
+        "Fertility Consultation",
+        "Menopause Management"
+      ],
+      "emergency": true,
+      "phone": "+91-44-1234-2007"
+    },
+    {
+      "id": 8,
+      "name": "Ophthalmology",
+      "floor": "1st Floor, Block E",
+      "head_of_department": "Dr. Vikram Singh",
+      "description": "Comprehensive eye care including medical, surgical, and refractive treatment.",
+      "services": [
+        "Cataract Surgery",
+        "LASIK & Refractive Surgery",
+        "Glaucoma Treatment",
+        "Diabetic Retinopathy Management",
+        "Retinal Detachment Surgery",
+        "Pediatric Eye Care",
+        "Contact Lens Fitting"
+      ],
+      "emergency": true,
+      "phone": "+91-44-1234-2008"
+    },
+    {
+      "id": 9,
+      "name": "ENT",
+      "floor": "2nd Floor, Block E",
+      "head_of_department": "Dr. Nisha Verma",
+      "description": "Ear, Nose, and Throat disorders diagnosis and treatment including head and neck conditions.",
+      "services": [
+        "Hearing Assessment & Aids",
+        "Sinus Surgery (FESS)",
+        "Tonsillectomy & Adenoidectomy",
+        "Septoplasty",
+        "Voice & Swallowing Disorders",
+        "Ear Drum Repair",
+        "Nasal Allergy Treatment"
+      ],
+      "emergency": false,
+      "phone": "+91-44-1234-2009"
+    },
+    {
+      "id": 10,
+      "name": "Psychiatry",
+      "floor": "5th Floor, Block PS",
+      "head_of_department": "Dr. Ramesh Babu",
+      "description": "Mental health diagnosis, treatment, and counseling for psychiatric disorders.",
+      "services": [
+        "Anxiety & Depression Treatment",
+        "Schizophrenia Management",
+        "OCD & Phobias",
+        "Addiction & De-addiction",
+        "Child & Adolescent Psychiatry",
+        "Psychotherapy",
+        "Electroconvulsive Therapy (ECT)"
+      ],
+      "emergency": false,
+      "phone": "+91-44-1234-2010"
+    }
+  ]
+}

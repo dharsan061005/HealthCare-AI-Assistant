@@ -1,0 +1,554 @@
+/* ============================================================
+   Healthcare AI Assistant — Professional Design System
+   Primary: #0EA5E9 (Sky Blue)  |  Base: #F8FAFC  |  Text: #0F172A
+   ============================================================ */
+
+/* ── Google Font ─────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+/* ── Root Variables ──────────────────────────────────────── */
+:root {
+  --primary:        #0EA5E9;
+  --primary-dark:   #0284C7;
+  --primary-light:  #E0F2FE;
+  --primary-glow:   rgba(14,165,233,0.15);
+  --success:        #10B981;
+  --success-light:  #D1FAE5;
+  --warning:        #F59E0B;
+  --warning-light:  #FEF3C7;
+  --danger:         #EF4444;
+  --danger-light:   #FEE2E2;
+  --surface:        #FFFFFF;
+  --surface-2:      #F8FAFC;
+  --surface-3:      #F1F5F9;
+  --border:         #E2E8F0;
+  --border-focus:   #0EA5E9;
+  --text-primary:   #0F172A;
+  --text-secondary: #475569;
+  --text-muted:     #94A3B8;
+  --shadow-sm:      0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+  --shadow-md:      0 4px 12px rgba(0,0,0,0.08), 0 2px 4px rgba(0,0,0,0.04);
+  --shadow-lg:      0 10px 30px rgba(0,0,0,0.10), 0 4px 8px rgba(0,0,0,0.05);
+  --radius-sm:      6px;
+  --radius-md:      10px;
+  --radius-lg:      16px;
+  --radius-xl:      20px;
+}
+
+/* ── Base & Typography ───────────────────────────────────── */
+html, body, [class*="css"] {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Hide Streamlit Branding ─────────────────────────────── */
+#MainMenu { visibility: visible; }
+footer { visibility: visible; }
+header { visibility: visible; }
+/* Keep the sidebar collapse/expand toggle button visible */
+header [data-testid="collapsedControl"],
+header button[kind="header"] {
+  visibility: visible !important;
+}
+.stDeployButton { display: none; }
+
+/* ── Main Content Area ───────────────────────────────────── */
+.main .block-container {
+  padding: 2rem 2.5rem 3rem;
+  max-width: 100%;
+}
+
+/* ── Page Header Titles ──────────────────────────────────── */
+h1 {
+  font-size: 1.85rem !important;
+  font-weight: 700 !important;
+  color: var(--text-primary) !important;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.25rem !important;
+}
+
+h2 {
+  font-size: 1.25rem !important;
+  font-weight: 600 !important;
+  color: var(--text-primary) !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
+}
+
+h3 {
+  font-size: 1.05rem !important;
+  font-weight: 600 !important;
+  color: var(--text-secondary) !important;
+}
+
+/* ══════════════════════════════════════════════════════════
+   SIDEBAR — permanent, dark theme
+   RULE: Only set background on the outer shell.
+   Do NOT touch > div children — that breaks Streamlit's
+   internal resize/collapse mechanism in v1.58+
+   ══════════════════════════════════════════════════════════ */
+
+[data-testid="stSidebar"] {
+  background-color: #0C1A2E !important;
+  border-right: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* Nav radio items */
+[data-testid="stSidebar"] [data-testid="stRadio"] label {
+  border-radius: 8px !important;
+  padding: 0.6rem 0.9rem !important;
+  border-left: 3px solid transparent !important;
+  color: #CBD5E1 !important;
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  transition: background 0.15s !important;
+  background: transparent !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] label:hover {
+  background: rgba(14,165,233,0.15) !important;
+  color: #E0F2FE !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] label:has(input:checked) {
+  background: rgba(14,165,233,0.22) !important;
+  color: #38BDF8 !important;
+  font-weight: 700 !important;
+  border-left-color: #0EA5E9 !important;
+}
+
+[data-testid="stSidebar"] [data-testid="stRadio"] input[type="radio"] {
+  position: absolute !important;
+  opacity: 0 !important;
+  width: 1px !important;
+  height: 1px !important;
+}
+
+/* All text in sidebar — light on dark */
+[data-testid="stSidebar"] p,
+[data-testid="stSidebar"] span,
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] h1,
+[data-testid="stSidebar"] h2,
+[data-testid="stSidebar"] h3 {
+  color: #CBD5E1 !important;
+}
+
+/* ── Metric Cards ─────────────────────────────────────────── */
+[data-testid="stMetric"] {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 1.25rem 1.5rem !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+[data-testid="stMetric"]:hover {
+  box-shadow: var(--shadow-md) !important;
+  transform: translateY(-1px);
+}
+
+[data-testid="stMetricLabel"] {
+  font-size: 0.75rem !important;
+  font-weight: 600 !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.06em !important;
+  color: var(--text-muted) !important;
+}
+
+[data-testid="stMetricValue"] {
+  font-size: 1.6rem !important;
+  font-weight: 700 !important;
+  color: var(--primary) !important;
+}
+
+/* ── Tabs ─────────────────────────────────────────────────── */
+.stTabs [data-baseweb="tab-list"] {
+  background: var(--surface-3) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 4px !important;
+  gap: 2px !important;
+  border: 1px solid var(--border) !important;
+}
+
+.stTabs [data-baseweb="tab"] {
+  border-radius: var(--radius-md) !important;
+  font-size: 0.85rem !important;
+  font-weight: 500 !important;
+  color: var(--text-secondary) !important;
+  padding: 0.5rem 1rem !important;
+  transition: all 0.2s !important;
+  border: none !important;
+  background: transparent !important;
+}
+
+.stTabs [data-baseweb="tab"]:hover {
+  background: rgba(14,165,233,0.08) !important;
+  color: var(--primary) !important;
+}
+
+.stTabs [aria-selected="true"] {
+  background: var(--surface) !important;
+  color: var(--primary) !important;
+  font-weight: 700 !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.stTabs [data-baseweb="tab-highlight"] {
+  display: none !important;
+}
+
+/* ── Buttons ─────────────────────────────────────────────── */
+.stButton > button {
+  border-radius: var(--radius-md) !important;
+  font-weight: 600 !important;
+  font-size: 0.88rem !important;
+  padding: 0.55rem 1.25rem !important;
+  transition: all 0.2s ease !important;
+  border: 1.5px solid var(--border) !important;
+  background: var(--surface) !important;
+  color: var(--text-secondary) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.stButton > button:hover {
+  border-color: var(--primary) !important;
+  color: var(--primary) !important;
+  box-shadow: 0 0 0 3px var(--primary-glow) !important;
+  transform: translateY(-1px) !important;
+}
+
+.stButton > button[kind="primary"] {
+  background: linear-gradient(135deg, #0EA5E9, #0284C7) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  box-shadow: 0 4px 14px rgba(14,165,233,0.35) !important;
+}
+
+.stButton > button[kind="primary"]:hover {
+  background: linear-gradient(135deg, #38BDF8, #0EA5E9) !important;
+  box-shadow: 0 6px 20px rgba(14,165,233,0.45) !important;
+  transform: translateY(-2px) !important;
+  color: #FFFFFF !important;
+}
+
+.stButton > button[kind="primary"]:active {
+  transform: translateY(0) !important;
+}
+
+/* ── Download Button ─────────────────────────────────────── */
+.stDownloadButton > button {
+  background: linear-gradient(135deg, #10B981, #059669) !important;
+  color: #FFFFFF !important;
+  border: none !important;
+  border-radius: var(--radius-md) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 14px rgba(16,185,129,0.30) !important;
+  transition: all 0.2s !important;
+}
+
+.stDownloadButton > button:hover {
+  box-shadow: 0 6px 20px rgba(16,185,129,0.45) !important;
+  transform: translateY(-1px) !important;
+}
+
+/* ── Form Inputs ─────────────────────────────────────────── */
+.stTextInput > div > div > input,
+.stTextArea > div > div > textarea,
+.stNumberInput > div > div > input {
+  border-radius: var(--radius-md) !important;
+  border: 1.5px solid var(--border) !important;
+  background: var(--surface) !important;
+  color: var(--text-primary) !important;
+  font-size: 0.9rem !important;
+  padding: 0.6rem 0.9rem !important;
+  transition: border-color 0.2s, box-shadow 0.2s !important;
+}
+
+.stTextInput > div > div > input:focus,
+.stTextArea > div > div > textarea:focus,
+.stNumberInput > div > div > input:focus {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px var(--primary-glow) !important;
+  outline: none !important;
+}
+
+.stSelectbox > div > div,
+.stMultiSelect > div > div {
+  border-radius: var(--radius-md) !important;
+  border: 1.5px solid var(--border) !important;
+  background: var(--surface) !important;
+  font-size: 0.9rem !important;
+}
+
+/* ── Alerts ──────────────────────────────────────────────── */
+[data-testid="stAlert"] {
+  border-radius: var(--radius-md) !important;
+  border: none !important;
+  font-size: 0.875rem !important;
+  padding: 0.85rem 1.1rem !important;
+}
+
+/* Success */
+[data-testid="stAlert"][data-baseweb="notification"][kind="positive"],
+.stSuccess {
+  background: var(--success-light) !important;
+  border-left: 4px solid var(--success) !important;
+  color: #065F46 !important;
+}
+
+/* Warning */
+[data-testid="stAlert"][data-baseweb="notification"][kind="warning"],
+.stWarning {
+  background: var(--warning-light) !important;
+  border-left: 4px solid var(--warning) !important;
+  color: #78350F !important;
+}
+
+/* Error */
+[data-testid="stAlert"][data-baseweb="notification"][kind="negative"],
+.stError {
+  background: var(--danger-light) !important;
+  border-left: 4px solid var(--danger) !important;
+  color: #7F1D1D !important;
+}
+
+/* Info */
+[data-testid="stAlert"][data-baseweb="notification"][kind="info"],
+.stInfo {
+  background: var(--primary-light) !important;
+  border-left: 4px solid var(--primary) !important;
+  color: #0C4A6E !important;
+}
+
+/* ── Chat Messages ───────────────────────────────────────── */
+[data-testid="stChatMessage"] {
+  border-radius: var(--radius-lg) !important;
+  padding: 1rem 1.25rem !important;
+  margin-bottom: 0.75rem !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  background: var(--surface) !important;
+}
+
+[data-testid="stChatMessage"][data-testid*="user"] {
+  background: var(--primary-light) !important;
+  border-color: rgba(14,165,233,0.2) !important;
+}
+
+/* Chat input */
+[data-testid="stChatInput"] {
+  border-radius: var(--radius-lg) !important;
+  border: 1.5px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+[data-testid="stChatInput"]:focus-within {
+  border-color: var(--primary) !important;
+  box-shadow: 0 0 0 3px var(--primary-glow) !important;
+}
+
+/* ── Expanders ───────────────────────────────────────────── */
+[data-testid="stExpander"] {
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-md) !important;
+  margin-bottom: 0.5rem !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-sm) !important;
+  overflow: hidden !important;
+}
+
+[data-testid="stExpander"] summary {
+  padding: 0.85rem 1rem !important;
+  font-weight: 600 !important;
+  font-size: 0.9rem !important;
+  color: var(--text-primary) !important;
+  background: var(--surface) !important;
+}
+
+[data-testid="stExpander"] summary:hover {
+  background: var(--surface-3) !important;
+  color: var(--primary) !important;
+}
+
+/* ── Dataframe / Table ───────────────────────────────────── */
+[data-testid="stDataFrame"] {
+  border-radius: var(--radius-lg) !important;
+  overflow: hidden !important;
+  border: 1px solid var(--border) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* ── File Uploader ───────────────────────────────────────── */
+[data-testid="stFileUploader"] {
+  border: 2px dashed var(--primary) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 2rem 1.5rem !important;
+  background: var(--primary-light) !important;
+  text-align: center !important;
+  transition: all 0.2s !important;
+}
+
+[data-testid="stFileUploader"]:hover {
+  background: rgba(14,165,233,0.12) !important;
+  border-color: var(--primary-dark) !important;
+}
+
+/* ── Containers with border ──────────────────────────────── */
+[data-testid="stVerticalBlockBorderWrapper"] {
+  border-radius: var(--radius-lg) !important;
+  border: 1px solid var(--border) !important;
+  background: var(--surface) !important;
+  box-shadow: var(--shadow-sm) !important;
+  padding: 1.25rem !important;
+}
+
+/* ── Spinner ─────────────────────────────────────────────── */
+[data-testid="stSpinner"] > div {
+  border-top-color: var(--primary) !important;
+}
+
+/* ── Progress bar ────────────────────────────────────────── */
+[data-testid="stProgressBar"] > div > div {
+  background: linear-gradient(90deg, var(--primary), #38BDF8) !important;
+  border-radius: 99px !important;
+}
+
+/* ── Caption / Small text ────────────────────────────────── */
+.stCaption, [data-testid="stCaptionContainer"] {
+  color: var(--text-muted) !important;
+  font-size: 0.78rem !important;
+}
+
+/* ── Form container ──────────────────────────────────────── */
+[data-testid="stForm"] {
+  background: var(--surface) !important;
+  border: 1px solid var(--border) !important;
+  border-radius: var(--radius-lg) !important;
+  padding: 1.5rem !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+/* ── Divider ─────────────────────────────────────────────── */
+hr {
+  border: none !important;
+  border-top: 1px solid var(--border) !important;
+  margin: 1.5rem 0 !important;
+}
+
+/* ── Custom page-header banner ───────────────────────────── */
+.page-header {
+  background: linear-gradient(135deg, #0C1A2E 0%, #0F2D4A 50%, #0C3A5C 100%);
+  border-radius: var(--radius-xl);
+  padding: 2rem 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.page-header::before {
+  content: '';
+  position: absolute;
+  top: -40%;
+  right: -5%;
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(14,165,233,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.page-header h1 {
+  color: #F8FAFC !important;
+  font-size: 1.75rem !important;
+  margin: 0 0 0.35rem !important;
+}
+
+.page-header p {
+  color: #94A3B8 !important;
+  margin: 0 !important;
+  font-size: 0.95rem !important;
+}
+
+/* ── Stat badge pills ────────────────────────────────────── */
+.stat-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  background: rgba(14,165,233,0.12);
+  border: 1px solid rgba(14,165,233,0.25);
+  color: #38BDF8;
+  border-radius: 99px;
+  padding: 0.25rem 0.85rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+
+/* ── Doctor / Department cards ───────────────────────────── */
+.info-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.2s, transform 0.2s;
+  height: 100%;
+}
+
+.info-card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+/* ── Medicine reminder card ──────────────────────────────── */
+.med-card {
+  background: linear-gradient(135deg, #F0F9FF, #E0F2FE);
+  border: 1px solid rgba(14,165,233,0.2);
+  border-radius: var(--radius-lg);
+  padding: 1.1rem 1.25rem;
+  box-shadow: var(--shadow-sm);
+}
+
+/* ── Status badges ───────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 99px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-scheduled  { background: #DBEAFE; color: #1E40AF; }
+.badge-completed  { background: #D1FAE5; color: #065F46; }
+.badge-cancelled  { background: #FEE2E2; color: #7F1D1D; }
+.badge-rescheduled{ background: #FEF3C7; color: #78350F; }
+
+/* ── Section label ───────────────────────────────────────── */
+.section-label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-muted);
+  margin-bottom: 0.75rem;
+}
+
+/* ── Scrollbar ───────────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--surface-3); }
+::-webkit-scrollbar-thumb { background: #CBD5E1; border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: #94A3B8; }
+
+/* ── Animations ──────────────────────────────────────────── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.main .block-container > div {
+  animation: fadeInUp 0.3s ease both;
+}
