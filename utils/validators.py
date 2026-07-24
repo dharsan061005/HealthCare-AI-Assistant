@@ -83,3 +83,33 @@ def validate_symptoms_input(text: str) -> Tuple[bool, str]:
     if len(text) > 2000:
         return False, "Symptom description too long. Please limit to 2000 characters."
     return True, ""
+
+
+def validate_caregiver_name(name: str) -> Tuple[bool, str]:
+    """Validate caregiver name — same rules as patient name."""
+    return validate_patient_name(name)
+
+
+def validate_phone_number(number: str) -> Tuple[bool, str]:
+    """Validate a mobile phone number (7–15 digits, optional leading +, spaces/hyphens allowed)."""
+    number = number.strip()
+    if not number:
+        return False, "Mobile number cannot be empty."
+    # Strip spaces, hyphens, and parentheses that are common formatting characters
+    digits_only = re.sub(r"[\s\-\(\)]", "", number)
+    if not re.match(r"^\+?[0-9]{7,15}$", digits_only):
+        return False, "Enter a valid mobile number (7–15 digits, optional leading +)."
+    return True, ""
+
+
+def validate_email_address(email: str) -> Tuple[bool, str]:
+    """Validate an email address format."""
+    email = email.strip()
+    if not email:
+        return False, "Email address cannot be empty."
+    if len(email) > 254:
+        return False, "Email address is too long."
+    pattern = r"^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
+    if not re.match(pattern, email):
+        return False, "Enter a valid email address (e.g. name@example.com)."
+    return True, ""

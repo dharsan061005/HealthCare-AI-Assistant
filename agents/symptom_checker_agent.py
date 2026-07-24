@@ -8,6 +8,7 @@ from typing import Dict, List
 import streamlit as st
 
 from utils import constants
+from utils.i18n import t, get_lang
 from utils.llm import chat_completion
 from utils.validators import validate_symptoms_input
 
@@ -74,26 +75,26 @@ def _build_messages(history: List[Dict[str, str]], user_msg: str, patient: dict)
 
 
 def render() -> None:
+    lang = get_lang(st.session_state)
+
     # ── Page header ───────────────────────────────────────────────────────────
-    st.markdown("""
+    st.markdown(f"""
     <div class="page-header">
         <div style="display:flex; align-items:center; gap:1rem;">
             <span style="font-size:2.2rem;">🩺</span>
             <div>
-                <h1 style="margin:0;">Symptom Checker</h1>
-                <p style="margin:0;">Describe your symptoms and get AI-powered health guidance</p>
+                <h1 style="margin:0;">{t("symptom_title", lang)}</h1>
+                <p style="margin:0;">{t("symptom_subtitle", lang)}</p>
             </div>
         </div>
     </div>
     """, unsafe_allow_html=True)
 
     # ── Disclaimer ────────────────────────────────────────────────────────────
-    st.markdown("""
+    st.markdown(f"""
     <div style="background:#FEF3C7; border-left:4px solid #F59E0B; border-radius:10px;
                 padding:0.85rem 1.1rem; margin-bottom:1.25rem; font-size:0.85rem; color:#78350F;">
-        <strong>⚠️ Medical Disclaimer:</strong> This is AI-generated information only and
-        does not constitute a medical diagnosis. Always consult a qualified healthcare
-        professional for advice, diagnosis, or treatment.
+        {t("medical_disclaimer", lang)}
     </div>
     """, unsafe_allow_html=True)
 
@@ -104,45 +105,44 @@ def render() -> None:
         st.session_state.symptom_patient = {}
 
     # ── Patient context panel ─────────────────────────────────────────────────
-    st.markdown("""
+    st.markdown(f"""
     <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.6rem;">
         <span style="background:#0EA5E9; color:#fff; border-radius:50%; width:22px; height:22px;
                      display:flex; align-items:center; justify-content:center;
                      font-size:0.72rem; font-weight:700; flex-shrink:0;">1</span>
-        <span style="font-weight:700; font-size:0.95rem; color:#0F172A;">Patient Context</span>
-        <span style="font-size:0.78rem; color:#94A3B8;">(optional — improves accuracy)</span>
+        <span style="font-weight:700; font-size:0.95rem; color:#0F172A;">{t("patient_context", lang)}</span>
+        <span style="font-size:0.78rem; color:#94A3B8;">({t("patient_context_hint", lang)})</span>
     </div>
     """, unsafe_allow_html=True)
 
-    with st.expander("Fill in patient details for a more tailored analysis", expanded=False):
+    with st.expander(f"{t('patient_context', lang)} — {t('patient_context_hint', lang)}", expanded=False):
         pc1, pc2, pc3 = st.columns(3)
         with pc1:
             pt_age = st.number_input(
-                "Age (years)", min_value=0, max_value=120, value=0, step=1, key="sc_age"
+                t("age_years", lang), min_value=0, max_value=120, value=0, step=1, key="sc_age"
             )
         with pc2:
             pt_gender = st.selectbox(
-                "Gender", ["Select…", "Male", "Female", "Other", "Prefer not to say"], key="sc_gender"
+                t("gender", lang), ["Select…", "Male", "Female", "Other", "Prefer not to say"], key="sc_gender"
             )
         with pc3:
             pt_allergies = st.text_input(
-                "Known Allergies", placeholder="e.g. Penicillin, dust", key="sc_allergies"
+                t("known_allergies", lang), placeholder=t("allergies_placeholder", lang), key="sc_allergies"
             )
 
         pc4, pc5 = st.columns(2)
         with pc4:
             pt_conditions = st.multiselect(
-                "Known Medical Conditions",
-                options=KNOWN_CONDITIONS[1:],   # exclude "None" from multiselect
+                t("known_conditions", lang),
+                options=KNOWN_CONDITIONS[1:],
                 key="sc_conditions",
                 placeholder="Select any that apply…",
             )
         with pc5:
             pt_medications = st.text_input(
-                "Current Medications", placeholder="e.g. Metformin, Lisinopril", key="sc_medications"
+                t("current_medications", lang), placeholder=t("medications_placeholder", lang), key="sc_medications"
             )
 
-        # Persist into session state so it survives chat reruns
         st.session_state.symptom_patient = {
             "age":         pt_age if pt_age > 0 else None,
             "gender":      pt_gender,
@@ -151,13 +151,13 @@ def render() -> None:
             "medications": pt_medications.strip(),
         }
 
-        # Show active context pills
+        # Active context pills
         active = []
-        if pt_age > 0:                                 active.append(f"👤 {pt_age} yrs")
-        if pt_gender not in ("Select…", ""):           active.append(f"⚧ {pt_gender}")
-        if pt_conditions:                              active.append(f"🏥 {', '.join(pt_conditions)}")
-        if pt_allergies.strip():                       active.append(f"⚠️ Allergy: {pt_allergies.strip()}")
-        if pt_medications.strip():                     active.append(f"💊 {pt_medications.strip()}")
+        if pt_age > 0:                       active.append(f"👤 {pt_age} yrs")
+        if pt_gender not in ("Select…", ""): active.append(f"⚧ {pt_gender}")
+        if pt_conditions:                    active.append(f"🏥 {', '.join(pt_conditions)}")
+        if pt_allergies.strip():             active.append(f"⚠️ {t('known_allergies', lang)}: {pt_allergies.strip()}")
+        if pt_medications.strip():           active.append(f"💊 {pt_medications.strip()}")
 
         if active:
             pills_html = "".join(
@@ -183,36 +183,36 @@ def render() -> None:
             f"💬 {msg_count} message{'s' if msg_count != 1 else ''} in session</div>",
             unsafe_allow_html=True,
         )
-        if st.button("🗑️ Clear Chat", key="clear_symptom_chat", use_container_width=True):
+        if st.button(t("clear_chat", lang), key="clear_symptom_chat", use_container_width=True):
             st.session_state.symptom_chat_history = []
             st.rerun()
     with tips_col:
-        st.markdown("""
+        st.markdown(f"""
         <div style="background:#F8FAFC; border:1px solid #E2E8F0; border-radius:10px;
                     padding:0.6rem 1rem; font-size:0.8rem; color:#475569; line-height:1.7;">
             <b style="color:#0F172A;">Tips for better results:</b>
             &nbsp;· Mention duration (e.g. <i>3 days</i>)
             &nbsp;· Rate severity (mild / moderate / severe)
             &nbsp;· Include related symptoms
-            &nbsp;· Fill in Patient Context above
+            &nbsp;· Fill in {t("patient_context", lang)} above
         </div>
         """, unsafe_allow_html=True)
 
     st.markdown("<div style='height:0.5rem'></div>", unsafe_allow_html=True)
 
     # ── Step 2 label ──────────────────────────────────────────────────────────
-    st.markdown("""
+    st.markdown(f"""
     <div style="display:flex; align-items:center; gap:0.6rem; margin-bottom:0.75rem;">
         <span style="background:#0EA5E9; color:#fff; border-radius:50%; width:22px; height:22px;
                      display:flex; align-items:center; justify-content:center;
                      font-size:0.72rem; font-weight:700; flex-shrink:0;">2</span>
-        <span style="font-weight:700; font-size:0.95rem; color:#0F172A;">Describe Your Symptoms</span>
+        <span style="font-weight:700; font-size:0.95rem; color:#0F172A;">{t("describe_symptoms", lang)}</span>
     </div>
     """, unsafe_allow_html=True)
 
     # ── Quick examples (only when chat is empty) ──────────────────────────────
     if not st.session_state.symptom_chat_history:
-        st.markdown("<div class='section-label'>Quick Examples — click to try</div>", unsafe_allow_html=True)
+        st.markdown(f"<div class='section-label'>{t('quick_examples', lang)}</div>", unsafe_allow_html=True)
         row1 = st.columns(3)
         row2 = st.columns(3)
         for col, (label, text) in zip(row1 + row2, QUICK_EXAMPLES):
@@ -228,7 +228,7 @@ def render() -> None:
 
     # ── Input ─────────────────────────────────────────────────────────────────
     prefill    = st.session_state.pop("prefill_symptom", "")
-    user_input = st.chat_input("Describe your symptoms… (e.g. 'headache and sore throat for 2 days')")
+    user_input = st.chat_input(t("chat_input_placeholder", lang))
     if not user_input and prefill:
         user_input = prefill
 
@@ -251,10 +251,10 @@ def render() -> None:
                 )
                 response = chat_completion(messages)
             st.markdown(response)
-            st.markdown("""
+            st.markdown(f"""
             <div style="margin-top:0.75rem; padding-top:0.75rem; border-top:1px solid #E2E8F0;
                         font-size:0.75rem; color:#94A3B8;">
-                ⚠️ AI-generated — not a medical diagnosis. Consult a healthcare professional.
+                {t("medical_disclaimer", lang)}
             </div>
             """, unsafe_allow_html=True)
 

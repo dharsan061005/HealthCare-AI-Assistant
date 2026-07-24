@@ -50,7 +50,13 @@ def test_create_and_get_appointment():
     from database.database import create_appointment, get_appointments, get_appointment_by_id
 
     apt_id = create_appointment(
+        hospital_name="Apollo Hospital",
         patient_name="Test Patient",
+        age=30,
+        gender="Male",
+        mobile_number="+91 98765 43210",
+        email="test@example.com",
+        reason_for_visit="Consultation",
         doctor_name="Dr. Suresh Patel",
         specialization="General Medicine",
         appointment_date="2027-01-15",
@@ -73,17 +79,23 @@ def test_duplicate_appointment_detection():
     from database.database import create_appointment, check_duplicate_appointment
 
     create_appointment(
+        hospital_name="Apollo Hospital",
         patient_name="Alice",
+        age=25,
+        gender="Female",
+        mobile_number="+91 98765 43211",
+        email="",
+        reason_for_visit="Consultation",
         doctor_name="Dr. Suresh Patel",
         specialization="General Medicine",
         appointment_date="2027-02-10",
         appointment_time="09:00",
     )
 
-    is_duplicate = check_duplicate_appointment("Dr. Suresh Patel", "2027-02-10", "09:00")
+    is_duplicate = check_duplicate_appointment("Apollo Hospital", "Dr. Suresh Patel", "2027-02-10", "09:00")
     assert is_duplicate is True
 
-    not_duplicate = check_duplicate_appointment("Dr. Suresh Patel", "2027-02-10", "10:00")
+    not_duplicate = check_duplicate_appointment("Apollo Hospital", "Dr. Suresh Patel", "2027-02-10", "10:00")
     assert not_duplicate is False
 
 
@@ -92,7 +104,13 @@ def test_cancel_appointment():
     from database.database import create_appointment, update_appointment_status, get_appointment_by_id
 
     apt_id = create_appointment(
+        hospital_name="Apollo Hospital",
         patient_name="Bob",
+        age=45,
+        gender="Male",
+        mobile_number="+91 98765 43212",
+        email="",
+        reason_for_visit="Checkup",
         doctor_name="Dr. Suresh Patel",
         specialization="General Medicine",
         appointment_date="2027-03-01",
@@ -110,7 +128,13 @@ def test_reschedule_appointment():
     from database.database import create_appointment, reschedule_appointment, get_appointment_by_id
 
     apt_id = create_appointment(
+        hospital_name="Apollo Hospital",
         patient_name="Carol",
+        age=35,
+        gender="Female",
+        mobile_number="+91 98765 43213",
+        email="",
+        reason_for_visit="Consultation",
         doctor_name="Dr. Rajesh Kumar",
         specialization="Neurology",
         appointment_date="2027-03-10",
@@ -175,4 +199,32 @@ def test_app_imports_without_error():
     from utils.llm import simple_query  # noqa: F401
     from utils.validators import validate_patient_name  # noqa: F401
     from utils.helpers import format_date  # noqa: F401
-    assert len(NAV_ITEMS) == 5
+    assert len(NAV_ITEMS) == 11
+
+
+def test_hospital_visits_crud():
+    """Should create and retrieve hospital visits."""
+    from database.database import create_hospital_visit, get_hospital_visits
+
+    visit_id = create_hospital_visit(
+        patient_name="Alex Mercer",
+        hospital_name="General Care Hospital",
+        hospital_address="456 Elm St, Cityville",
+        hospital_contact="+1 555-0199",
+        department_visited="Cardiology",
+        doctor_name="Dr. Sarah Connor",
+        visit_date="2026-07-21",
+        reason_for_visit="Routine cardiovascular checkup.",
+        emergency_contact="+1 555-0200"
+    )
+    assert visit_id > 0
+
+    visits = get_hospital_visits(patient_name="Alex Mercer")
+    assert len(visits) == 1
+    assert visits[0]["hospital_name"] == "General Care Hospital"
+    assert visits[0]["doctor_name"] == "Dr. Sarah Connor"
+    assert visits[0]["emergency_contact"] == "+1 555-0200"
+
+    # All visits test
+    all_visits = get_hospital_visits()
+    assert len(all_visits) >= 1

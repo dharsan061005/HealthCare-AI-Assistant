@@ -1,0 +1,10 @@
+
+--- PATIENT RECORD DELETION AUDIT TRAIL ---
+Timestamp: 2026-07-20T12:01:13.155371
+Action: Cascade Hard Delete
+Patient ID: 1
+Patient Name: dharsan
+Patient Email: dharsanannadurai10@gmail.com
+Performed By: System/Admin (AI Command Line)
+Status: Success
+-------------------------------------------

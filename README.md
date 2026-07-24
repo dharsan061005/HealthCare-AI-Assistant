@@ -1,127 +1,111 @@
-# Healthcare AI Assistant
+# Healthcare AI Assistant 🏥🤖
 
-An AI-powered healthcare assistant built with Streamlit and Google Gemini, combining 5 intelligent agents in one app.
+An advanced, privacy-first healthcare management platform powered by Artificial Intelligence (Google Gemini & Groq). This assistant offers dynamic appointment scheduling, multi-family health tracking, AI-driven medical report analysis, symptom tracking, and sophisticated prescription reminders, all embedded in a beautiful and responsive Streamlit interface.
+
+## Project Overview
+
+The Healthcare AI Assistant digitizes personal and family medical management. It securely persists patient demographics and clinical histories across an offline-capable SQLite layer, while enabling LLM-powered diagnostics to explain complex medical reports and offer real-time health recommendations.
 
 ## Features
 
-| Agent | Description |
-|-------|-------------|
-| **Hospital Information** | Browse departments, doctors, facilities, timings, and insurance from local JSON |
-| **Appointment Scheduling** | Book, view, cancel, and reschedule appointments with duplicate prevention |
-| **Symptom Checker** | Describe symptoms in natural language; Gemini returns conditions + self-care tips |
-| **Report Summarizer** | Upload a PDF report; Gemini returns a structured summary + downloadable .txt |
-| **Prescription Reminders** | Add, edit, delete, and view medicine reminders sorted by time |
+- **Dynamic Appointment Scheduling:** Complete workflows to book, reschedule, and cancel appointments with automated duplicate detection based on hospital, doctor, date, and time.
+- **Family Management:** Comprehensive dashboards to manage "My Family". Features dynamic forms for inputting extensive medical fields (Height, Weight, BMI, Allergies, Blood Group).
+- **Electronic Health Records (EHR):** Track vitals, medical history, vaccinations, and generate exportable PDF reports.
+- **Medication Reminders:** Schedule and visualize active prescriptions, log missed medicines, and configure notification alerts.
+- **Symptom Tracker & Emergency Connect:** Keep a rolling log of symptoms and configure prioritized emergency contacts.
 
----
+## AI Features (Gemini & Groq)
 
-## Quick Start
+- **AI Report Summarizer:** Upload raw medical and lab reports (PDF/TXT) and let the Gemini/Groq LLM extract key takeaways, highlight anomalies, and present actionable next steps in plain English.
+- **Ask AI:** A customized, context-aware chatbot capable of understanding your family's specific medical conditions and history to provide accurate, safe health guidance.
+- **Smart Recommendations:** Auto-generated wellness checklists uniquely tailored to the saved biometric parameters of patients.
 
-### 1. Navigate to the project folder
+## Screenshots
 
-```
-cd "Healthcare_AI_Assistant"
-```
+*(Coming Soon - Please add your application screenshots here to showcase the beautiful UI!)*
 
-### 2. Create a virtual environment and install dependencies
+## Installation Guide
 
-```
-python -m venv venv
-venv\Scripts\activate
+Ensure you have Python 3.9+ installed on your system. 
 
-pip install -r requirements.txt
-```
-
-### 3. Configure your Gemini API key
-
-```
-copy .env.example .env
-```
-
-Then edit `.env` and replace `your-gemini-api-key-here` with your real key from
-https://aistudio.google.com/app/apikey
-
-### 4. Run the app
-
-```
-streamlit run app.py
-```
-
-The app opens at http://localhost:8501
-
----
-
-## Folder Structure
-
-```
-Healthcare_AI_Assistant/
-+-- app.py                          Main Streamlit entry point
-+-- config.py                       Centralized config (loads .env)
-+-- requirements.txt
-+-- .env.example                    Copy to .env and add your Gemini API key
-+-- agents/
-|   +-- appointment_agent.py
-|   +-- symptom_checker_agent.py
-|   +-- report_summarizer_agent.py
-|   +-- prescription_reminder_agent.py
-|   +-- hospital_information_agent.py
-|   +-- router.py
-+-- database/
-|   +-- database.py                 All SQLite CRUD operations
-|   +-- schema.sql                  Table definitions
-|   +-- healthcare.db               Auto-created on first run
-+-- utils/
-|   +-- llm.py                      Gemini wrapper with graceful fallback
-|   +-- pdf_reader.py               pdfplumber text extraction
-|   +-- validators.py               Input validation
-|   +-- helpers.py                  Formatting utilities
-|   +-- constants.py                LLM prompts, dropdown options
-+-- data/
-|   +-- doctors.json
-|   +-- departments.json
-|   +-- hospital_info.json
-|   +-- sample_reports/
-+-- assets/
-|   +-- styles.css
-+-- tests/
-    +-- test_database.py
-    +-- test_agents.py
-```
-
----
-
-## Running Tests
-
-```
-pip install pytest
-python -m pytest tests/ -v
-```
-
----
+1. **Clone the repository:**
+   ```bash
+   git clone https://github.com/your-username/Healthcare-AI-Assistant.git
+   cd Healthcare-AI-Assistant
+   ```
+2. **Set up a Virtual Environment:**
+   ```bash
+   python -m venv .venv
+   # Windows
+   .venv\Scripts\activate
+   # Linux/MacOS
+   source .venv/bin/activate
+   ```
+3. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
 ## Environment Variables
 
-| Variable | Required | Default | Description |
-|---|---|---|---|
-| GEMINI_API_KEY | For LLM features | - | Your Google Gemini API key |
-| GEMINI_MODEL | No | gemini-2.5-flash | Gemini model to use |
-| GEMINI_MAX_TOKENS | No | 1024 | Max output tokens per response |
-| GEMINI_TEMPERATURE | No | 0.3 | Response creativity (0 to 1) |
-| LOG_LEVEL | No | INFO | Logging verbosity |
+This project requires API keys to fuel the AI engine. Create a `.env` file at the root of the project with the following configuration:
 
----
+```env
+# Required for primary AI features
+GEMINI_API_KEY=your_google_gemini_api_key_here
 
-## Agents that require a Gemini API key
+# Required for secondary fallback LLM features
+GROQ_API_KEY=your_groq_api_key_here
+```
+> **Security Note:** Never commit your `.env` file! It is safely ignored via our `.gitignore`.
 
-- Symptom Checker
-- Medical Report Summarizer
-- Hospital Information AI Chat
+## Project Structure
 
-The Appointment Scheduling and Prescription Reminder agents work fully without an API key.
+```
+Healthcare-AI-Assistant/
+├── agents/             # Core UI components and routed Streamlit pages 
+├── database/           # SQLite logic, migration scripts, and family / healthcare schemas
+├── tests/              # Pytest battery (agents, DB, deletions)
+├── utils/              # PDF extraction, styling constants, data validation, and LLM wrappers
+├── app.py              # Main Streamlit execution entry point
+├── config.py           # DotEnv variable instantiator
+├── requirements.txt    # Project dependencies
+└── README.md           # Documentation
+```
 
----
+## Technologies Used
 
-## Medical Disclaimer
+- **Frontend / Application Framework:** [Streamlit](https://streamlit.io/)
+- **Database:** SQLite3 (Serverless)
+- **AI / LLMs:** Google Generative AI (Gemini), Groq
+- **Data Manipulation:** Pandas
+- **PDF Extraction:** PDFPlumber, FPDF2
+- **Testing:** Pytest
 
-This application provides AI-generated information for educational purposes only.
-It is not a substitute for professional medical advice, diagnosis, or treatment.
-Always consult a qualified healthcare professional.
+## How to Run
+
+Launch the application safely by executing:
+```bash
+streamlit run app.py
+```
+The interface will be hosted immediately at `http://localhost:8501`.
+
+## Deployment Guide
+
+If deploying to a production server (like Streamlit Community Cloud, Heroku, or AWS):
+1. Push this repository to GitHub.
+2. Link the repository to your hosting provider.
+3. Inject the `GEMINI_API_KEY` and `GROQ_API_KEY` into your host's environment secrets interface.
+4. Set the startup command to `streamlit run app.py`.
+
+## Future Enhancements
+
+- Integrate Twilio / SMTP for actual outbound SMS and Email reminders.
+- Build interactive graphs (Plotly) for longitudinal vital signs (Blood Pressure & Glucose).
+- Enable multi-lingual localization support using dynamic translation files.
+
+## Author
+*Created and Maintained by the Healthcare AI Assistant Team / Dharsan.*
+
+## License
+MIT License.

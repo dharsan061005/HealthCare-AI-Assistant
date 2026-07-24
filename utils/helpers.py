@@ -80,6 +80,7 @@ def appointments_to_display_rows(appointments: List[Dict]) -> List[Dict]:
     for apt in appointments:
         rows.append({
             "ID": apt.get("id", ""),
+            "Hospital": apt.get("hospital_name", "General Hospital"),
             "Patient": apt.get("patient_name", ""),
             "Doctor": apt.get("doctor_name", ""),
             "Specialization": apt.get("specialization", ""),
@@ -102,5 +103,47 @@ def reminders_to_display_rows(reminders: List[Dict]) -> List[Dict]:
             "Frequency": r.get("frequency", ""),
             "Patient": r.get("patient_name", "") or "—",
             "Notes": truncate_text(r.get("notes", "") or "—"),
+        })
+    return rows
+
+
+def caregivers_to_display_rows(caregivers: List[Dict]) -> List[Dict]:
+    """Transform raw caregiver dicts into display-friendly format."""
+    rows = []
+    for cg in caregivers:
+        rows.append({
+            "ID":           cg.get("id", ""),
+            "Patient":      cg.get("patient_name", ""),
+            "Caregiver":    cg.get("caregiver_name", ""),
+            "Relationship": cg.get("relationship", ""),
+            "Mobile":       cg.get("mobile_number", ""),
+            "Email":        cg.get("email", ""),
+            "Notify Via":   cg.get("notification_preference", ""),
+            "Added On":     format_date(cg.get("created_at", "")[:10]),
+        })
+    return rows
+
+
+def notification_logs_to_display_rows(logs: List[Dict]) -> List[Dict]:
+    """Transform notification log dicts into display-friendly format."""
+    type_icons = {
+        "reminder":       "💊",
+        "report":         "📄",
+        "missed_medicine": "⚠️",
+    }
+    status_icons = {"sent": "✅", "failed": "❌", "pending": "⏳"}
+    rows = []
+    for lg in logs:
+        ntype = lg.get("notification_type", "")
+        status = lg.get("status", "")
+        rows.append({
+            "ID":        lg.get("id", ""),
+            "Type":      f"{type_icons.get(ntype,'📋')} {ntype.replace('_',' ').title()}",
+            "Patient":   lg.get("patient_name", ""),
+            "Caregiver": lg.get("caregiver_name", ""),
+            "Channel":   lg.get("channel", "").capitalize(),
+            "Subject":   truncate_text(lg.get("subject", "") or "—", 50),
+            "Status":    f"{status_icons.get(status,'?')} {status.capitalize()}",
+            "Sent At":   lg.get("sent_at", "")[:16],
         })
     return rows

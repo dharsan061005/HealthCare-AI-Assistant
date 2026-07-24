@@ -22,6 +22,15 @@ GROQ_MAX_TOKENS = int(os.getenv("GROQ_MAX_TOKENS", "2048"))
 GROQ_TEMPERATURE = float(os.getenv("GROQ_TEMPERATURE", "0.4"))
 
 # ==========================
+# Gemini Configuration
+# ==========================
+GEMINI_API_KEY  = os.getenv("GEMINI_API_KEY", "")
+GEMINI_MODEL    = os.getenv("GEMINI_MODEL", "gemini-1.5-flash")
+
+# Active AI provider: "gemini" or "groq" (falls back to groq if key missing)
+AI_PROVIDER = os.getenv("AI_PROVIDER", "groq").lower()
+
+# ==========================
 # App Configuration
 # ==========================
 APP_TITLE = "Healthcare AI Assistant"
